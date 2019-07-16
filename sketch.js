@@ -7,17 +7,20 @@ function setup() {
 
 function draw() {
   background(100);
+  fill(255);
+  ellipse(200, 350, 50, 50);
+
   for (let i = 0; i < bubbleArray.length; i++) {
     bubbleArray[i].draw();
   }
-  bubbleArray.forEach(bubble => {
-    bubble.move();
+  bubbleArray.forEach(item => {
+    item.move();
   });
+  bubbleArray.push(new Bubble(200, 350, 50, 50));
+  console.log(bubbleArray);
 }
 
-function mouseClicked() {
-  bubbleArray.push(new Bubble(mouseX, mouseY, 50, 50));
-}
+function mouseClicked() {}
 
 class Bubble {
   constructor(x, y, width, height) {
@@ -34,6 +37,9 @@ class Bubble {
   }
 
   draw() {
+    let mappedY = map(this.y, 0, 600, 100, 255);
+    fill(mappedY);
+    noStroke();
     ellipse(this.x, this.y, this.width, this.height);
   }
 }
